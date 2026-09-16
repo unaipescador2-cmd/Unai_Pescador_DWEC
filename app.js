@@ -6,14 +6,18 @@ const contador = document.querySelector("#contador");
 
 let clics = 0;
 
-botonTema.addEventListener("click", () => {
-	const modoClaroActivo = document.body.classList.toggle("modo-claro");
+if (botonTema) {
+	botonTema.addEventListener("click", () => {
+		const modoClaroActivo = document.body.classList.toggle("modo-claro");
 
-	botonTema.textContent = modoClaroActivo ? "🌙 Modo oscuro" : "☀️ Modo claro";
-	botonTema.setAttribute("aria-pressed", String(modoClaroActivo));
-});
+		botonTema.textContent = modoClaroActivo ? "🌙 Modo oscuro" : "☀️ Modo claro";
+		botonTema.setAttribute("aria-pressed", String(modoClaroActivo));
+	});
+}
 
-botonPulsar.addEventListener("click", () => {
-	clics += 1;
-	contador.textContent = clics;
-});
+if (botonPulsar && contador) {
+	botonPulsar.addEventListener("click", () => {
+		clics += 1;
+		contador.textContent = clics;
+	});
+}
