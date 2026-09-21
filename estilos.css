@@ -17,7 +17,7 @@ body {
 font-family: "Segoe UI", system-ui, sans-serif;
 background-color: var(--fondo);
 color: var(--texto);
-max-width: 700px;
+max-width: 1200px;
 margin: 40px auto;
 padding: 0 20px;
 line-height: 1.6;
@@ -92,4 +92,66 @@ outline-offset: 3px;
 }
 h1 {
 color: var(--acento);
+
+}
+table {
+border-collapse: separate;
+border-spacing: 0;
+box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+margin: 28px 0;
+overflow: hidden;
+width: 100%;
+}
+caption {
+color: var(--acento);
+font-size: 1.2rem;
+font-weight: 700;
+margin-bottom: 10px;
+text-align: left;
+}
+th,
+td {
+border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+padding: 15px 18px;
+vertical-align: top;
+text-align: left;
+}
+th {
+background-color: var(--acento);
+color: var(--boton-texto);
+font-size: 0.9rem;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+}
+tbody tr {
+background-color: rgba(255, 255, 255, 0.03);
+transition: background-color 0.2s ease, transform 0.2s ease;
+}
+tr:nth-child(even) {
+background-color: rgba(255, 255, 255, 0.06);
+}
+tbody tr:hover {
+background-color: rgba(79, 140, 255, 0.16);
+}
+tbody tr:last-child td {
+border-bottom: 0;
+}
+td:nth-child(4),
+td:nth-child(5) {
+font-weight: 700;
+white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+	body {
+	display: block;
+	overflow-x: auto;
+	}
+	table {
+	font-size: 0.9rem;
+	}
+	th,
+	td {
+	padding: 12px 14px;
+	}
 }
