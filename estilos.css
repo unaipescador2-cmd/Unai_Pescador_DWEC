@@ -94,6 +94,118 @@ h1 {
 color: var(--acento);
 
 }
+.contacto {
+background-color: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 12px;
+padding: 24px;
+margin-top: 32px;
+max-width: 700px;
+}
+.contacto h2 {
+color: var(--acento);
+margin-top: 0;
+}
+#formulario-contacto {
+display: grid;
+gap: 18px;
+}
+.campo {
+display: grid;
+gap: 8px;
+}
+.campo label {
+font-weight: 700;
+}
+.campo input,
+.campo textarea {
+background-color: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.18);
+border-radius: 8px;
+color: var(--texto);
+font: inherit;
+padding: 12px 14px;
+width: 100%;
+box-sizing: border-box;
+}
+.campo input::placeholder,
+.campo textarea::placeholder {
+color: rgba(232, 236, 244, 0.7);
+}
+body.modo-claro .campo input,
+body.modo-claro .campo textarea {
+background-color: #ffffff;
+border-color: rgba(24, 34, 53, 0.15);
+color: var(--texto);
+}
+body.modo-claro .campo input::placeholder,
+body.modo-claro .campo textarea::placeholder {
+color: rgba(24, 34, 53, 0.6);
+}
+.mensaje-formulario {
+min-height: 24px;
+margin: 0;
+font-weight: 700;
+}
+.mensaje-formulario.exito {
+color: #4ade80;
+}
+.mensaje-formulario.error {
+color: #f87171;
+}
+.formulario-juegos {
+margin-top: 32px;
+padding: 24px;
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 12px;
+background-color: rgba(255, 255, 255, 0.04);
+display: grid;
+gap: 18px;
+max-width: 800px;
+}
+.formulario-juegos label {
+font-weight: 700;
+}
+.formulario-juegos input,
+.formulario-juegos select {
+background-color: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.18);
+border-radius: 8px;
+color: var(--texto);
+font: inherit;
+padding: 10px 12px;
+width: 100%;
+box-sizing: border-box;
+}
+body.modo-claro .formulario-juegos input,
+body.modo-claro .formulario-juegos select {
+background-color: #ffffff;
+border-color: rgba(24, 34, 53, 0.15);
+color: var(--texto);
+}
+.campo-formulario {
+display: grid;
+gap: 8px;
+}
+#boton-anadir {
+width: fit-content;
+min-width: 160px;
+}
+#boton-anadir:hover {
+filter: brightness(1.08);
+transform: translateY(-1px);
+}
+.mensaje-anadir {
+margin: 0;
+min-height: 24px;
+font-weight: 700;
+}
+.mensaje-anadir.exito {
+color: #4ade80;
+}
+.mensaje-anadir.error {
+color: #f87171;
+}
 table {
 border-collapse: separate;
 border-spacing: 0;

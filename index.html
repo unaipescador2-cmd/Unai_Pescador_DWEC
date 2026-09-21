@@ -20,6 +20,30 @@
 <button id="boton-pulsar" type="button">Púlsame</button>
 <span>Has cliqueado <strong id="contador">0</strong> veces</span>
 </div>
+
+<section class="contacto" aria-labelledby="titulo-formulario">
+<h2 id="titulo-formulario">Formulario de contacto</h2>
+<form id="formulario-contacto" novalidate>
+<div class="campo">
+<label for="nombre">Nombre</label>
+<input id="nombre" name="nombre" type="text" placeholder="Escribe tu nombre" required>
+</div>
+<div class="campo">
+<label for="apellidos">Apellidos</label>
+<input id="apellidos" name="apellidos" type="text" placeholder="Escribe tus apellidos" required>
+</div>
+<div class="campo">
+<label for="correo">Correo electrónico</label>
+<input id="correo" name="correo" type="email" placeholder="correo@ejemplo.com" required>
+</div>
+<div class="campo">
+<label for="mensaje">Mensaje</label>
+<textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu comentario" required></textarea>
+</div>
+<button type="submit">Enviar</button>
+<p id="mensaje-formulario" class="mensaje-formulario" aria-live="polite"></p>
+</form>
+</section>
 <script src="app.js"></script>
 </body>
 

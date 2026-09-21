@@ -39,8 +39,62 @@ const videojuegos = [
 ];
 
 const cuerpoVideojuegos = document.querySelector("#cuerpo-videojuegos");
+const botonTema = document.querySelector("#boton-tema");
+const botonPulsar = document.querySelector("#boton-pulsar");
+const contador = document.querySelector("#contador");
+const formularioContacto = document.querySelector("#formulario-contacto");
+const mensajeFormulario = document.querySelector("#mensaje-formulario");
+const formularioVideojuegos = document.querySelector("#formulario-videojuegos");
+const botonAnadir = document.querySelector("#boton-anadir");
+const mensajeAnadir = document.querySelector("#mensaje-anadir");
 
-if (cuerpoVideojuegos) {
+function guardarFormulario(formulario) {
+	if (!formulario || !window.localStorage) {
+		return;
+	}
+
+	const datos = {};
+
+	Array.from(formulario.elements).forEach((campo) => {
+		const esCampoValido = campo.name && campo.tagName !== "BUTTON" && !["submit", "reset"].includes(campo.type);
+		if (esCampoValido) {
+			datos[campo.name] = campo.value;
+		}
+	});
+
+	localStorage.setItem(formulario.id, JSON.stringify(datos));
+}
+
+function restaurarFormulario(formulario) {
+	if (!formulario || !window.localStorage) {
+		return;
+	}
+
+	const datosGuardados = localStorage.getItem(formulario.id);
+	if (!datosGuardados) {
+		return;
+	}
+
+	try {
+		const datos = JSON.parse(datosGuardados);
+		Object.entries(datos).forEach(([nombre, valor]) => {
+			const campo = formulario.elements.namedItem(nombre);
+			if (campo) {
+				campo.value = valor;
+			}
+		});
+	} catch (error) {
+		console.warn("No se pudieron restaurar los datos del formulario:", error);
+	}
+}
+
+function pintarTabla() {
+	if (!cuerpoVideojuegos) {
+		return;
+	}
+
+	cuerpoVideojuegos.innerHTML = "";
+
 	videojuegos.forEach((videojuego) => {
 		const fila = cuerpoVideojuegos.insertRow();
 
@@ -52,9 +106,9 @@ if (cuerpoVideojuegos) {
 	});
 }
 
-const botonTema = document.querySelector("#boton-tema");
-const botonPulsar = document.querySelector("#boton-pulsar");
-const contador = document.querySelector("#contador");
+if (cuerpoVideojuegos) {
+	pintarTabla();
+}
 
 let clics = 0;
 
@@ -71,5 +125,80 @@ if (botonPulsar && contador) {
 	botonPulsar.addEventListener("click", () => {
 		clics += 1;
 		contador.textContent = clics;
+	});
+}
+
+if (formularioContacto && mensajeFormulario) {
+	restaurarFormulario(formularioContacto);
+	formularioContacto.addEventListener("input", () => guardarFormulario(formularioContacto));
+	formularioContacto.addEventListener("change", () => guardarFormulario(formularioContacto));
+
+	formularioContacto.addEventListener("submit", (evento) => {
+		evento.preventDefault();
+
+		const nombre = formularioContacto.nombre.value.trim();
+		const apellidos = formularioContacto.apellidos.value.trim();
+		const correo = formularioContacto.correo.value.trim();
+		const mensaje = formularioContacto.mensaje.value.trim();
+
+		if (!nombre || !apellidos || !correo || !mensaje) {
+			mensajeFormulario.textContent = "Rellena todos los campos antes de enviar.";
+			mensajeFormulario.classList.remove("exito");
+			mensajeFormulario.classList.add("error");
+			return;
+		}
+
+		const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+		if (!emailValido) {
+			mensajeFormulario.textContent = "Introduce un correo electrónico válido.";
+			mensajeFormulario.classList.remove("exito");
+			mensajeFormulario.classList.add("error");
+			return;
+		}
+
+		mensajeFormulario.textContent = `Gracias ${nombre}, tu mensaje ha sido enviado correctamente.`;
+		mensajeFormulario.classList.remove("error");
+		mensajeFormulario.classList.add("exito");
+		formularioContacto.reset();
+		localStorage.removeItem(formularioContacto.id);
+	});
+}
+
+if (formularioVideojuegos && botonAnadir && mensajeAnadir) {
+	restaurarFormulario(formularioVideojuegos);
+	formularioVideojuegos.addEventListener("input", () => guardarFormulario(formularioVideojuegos));
+	formularioVideojuegos.addEventListener("change", () => guardarFormulario(formularioVideojuegos));
+
+	botonAnadir.addEventListener("click", (evento) => {
+		evento.preventDefault();
+
+		const nombre = document.querySelector("#nombre-juego").value.trim();
+		const compania = document.querySelector("#compania-juego").value.trim();
+		const plataforma = document.querySelector("#plataforma-juego").value.trim();
+		const valoracion = document.querySelector("#valoracion-juego").value.trim();
+		const precio = document.querySelector("#precio-juego").value.trim();
+
+		if (!nombre || !compania || !plataforma || !valoracion || !precio) {
+			mensajeAnadir.textContent = "Completa todos los campos para añadir un juego.";
+			mensajeAnadir.classList.remove("exito");
+			mensajeAnadir.classList.add("error");
+			return;
+		}
+
+		const nuevoJuego = {
+			nombre,
+			compania,
+			plataforma,
+			valoracion: `${Number(valoracion).toFixed(1).replace(".", ",")}/10`,
+			precio: `${Number(precio).toFixed(2).replace(".", ",")} €`
+		};
+
+		videojuegos.push(nuevoJuego);
+		pintarTabla();
+		formularioVideojuegos.reset();
+		localStorage.removeItem(formularioVideojuegos.id);
+		mensajeAnadir.textContent = "Juego añadido correctamente.";
+		mensajeAnadir.classList.remove("error");
+		mensajeAnadir.classList.add("exito");
 	});
 }

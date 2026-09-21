@@ -30,6 +30,38 @@
 <tbody id="cuerpo-videojuegos">
 </tbody>
 </table>
+
+<form id="formulario-videojuegos" class="formulario-juegos" novalidate>
+	<div class="campo-formulario">
+		<label for="nombre-juego">Nombre</label>
+		<input id="nombre-juego" name="nombre-juego" type="text" placeholder="Ej: Celeste" required>
+	</div>
+	<div class="campo-formulario">
+		<label for="compania-juego">Compañía</label>
+		<input id="compania-juego" name="compania-juego" type="text" placeholder="Ej: Matt Makes Games" required>
+	</div>
+	<div class="campo-formulario">
+		<label for="plataforma-juego">Plataforma</label>
+		<select id="plataforma-juego" name="plataforma-juego" required>
+			<option value="">Selecciona una plataforma</option>
+			<option value="PC">PC</option>
+			<option value="PlayStation">PlayStation</option>
+			<option value="Xbox">Xbox</option>
+			<option value="Nintendo Switch">Nintendo Switch</option>
+			<option value="PC, Nintendo Switch">PC, Nintendo Switch</option>
+		</select>
+	</div>
+	<div class="campo-formulario">
+		<label for="valoracion-juego">Valoración</label>
+		<input id="valoracion-juego" name="valoracion-juego" type="number" min="0" max="10" step="0.1" placeholder="Ej: 9.5" required>
+	</div>
+	<div class="campo-formulario">
+		<label for="precio-juego">Precio</label>
+		<input id="precio-juego" name="precio-juego" type="number" min="0" step="0.01" placeholder="Ej: 19.99" required>
+	</div>
+	<button id="boton-anadir" type="submit">Añadir juego</button>
+	<p id="mensaje-anadir" class="mensaje-anadir" aria-live="polite"></p>
+</form>
 <script src="app.js"></script>
 </body>
 </html>
