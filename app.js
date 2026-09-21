@@ -128,41 +128,6 @@ if (botonPulsar && contador) {
 	});
 }
 
-if (formularioContacto && mensajeFormulario) {
-	restaurarFormulario(formularioContacto);
-	formularioContacto.addEventListener("input", () => guardarFormulario(formularioContacto));
-	formularioContacto.addEventListener("change", () => guardarFormulario(formularioContacto));
-
-	formularioContacto.addEventListener("submit", (evento) => {
-		evento.preventDefault();
-
-		const nombre = formularioContacto.nombre.value.trim();
-		const apellidos = formularioContacto.apellidos.value.trim();
-		const correo = formularioContacto.correo.value.trim();
-		const mensaje = formularioContacto.mensaje.value.trim();
-
-		if (!nombre || !apellidos || !correo || !mensaje) {
-			mensajeFormulario.textContent = "Rellena todos los campos antes de enviar.";
-			mensajeFormulario.classList.remove("exito");
-			mensajeFormulario.classList.add("error");
-			return;
-		}
-
-		const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
-		if (!emailValido) {
-			mensajeFormulario.textContent = "Introduce un correo electrónico válido.";
-			mensajeFormulario.classList.remove("exito");
-			mensajeFormulario.classList.add("error");
-			return;
-		}
-
-		mensajeFormulario.textContent = `Gracias ${nombre}, tu mensaje ha sido enviado correctamente.`;
-		mensajeFormulario.classList.remove("error");
-		mensajeFormulario.classList.add("exito");
-		formularioContacto.reset();
-		localStorage.removeItem(formularioContacto.id);
-	});
-}
 
 if (formularioVideojuegos && botonAnadir && mensajeAnadir) {
 	restaurarFormulario(formularioVideojuegos);
